@@ -20,8 +20,9 @@ file_extension = '.jpg'
 root_path = os.getenv('ROOT_PATH')
 description_path = root_path + 'html/'
 
+# hide page
 driver_options = webdriver.EdgeOptions()
-# driver_options.add_argument('--headless')
+driver_options.add_argument('--headless')
 driver = webdriver.Edge(options = driver_options)
 
 await_loading = 3
