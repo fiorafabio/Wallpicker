@@ -7,18 +7,19 @@ from dotenv import load_dotenv
 from selenium import webdriver # type: ignore
 from selenium.webdriver.common.by import By # type: ignore
 from datetime import datetime
+from time import sleep
 
 load_dotenv()
 
 # constants
-image_page_url = 'https://bingwallpaper.anerg.com'
-image_main_page_url = image_page_url + '/gb'
 description_page_url = 'https://peapix.com'
 description_main_page_url = description_page_url + '/bing/gb'
 floorp_directory = 'Floorp/'
 file_extension = '.jpg'
 root_path = os.getenv('ROOT_PATH')
 description_path = root_path + 'html/'
+extension_path = os.getenv('EXTENSION_PATH')
+extension_file_name = 'walltexter@floorp.org.xpi'
 
 # hide page
 driver_options = webdriver.EdgeOptions()
@@ -81,6 +82,13 @@ try:
    os.system(delete_zip_command)
    create_zip_command = 'tar.exe -a -c -f ' + zip_file_name + ' css html icons manifest.json'
    os.system(create_zip_command)
+   copy_zip_command = 'copy "' + root_path + zip_file_name + '" "' + extension_path + zip_file_name +'"'
+   os.system(copy_zip_command)
+   os.chdir(extension_path)
+   delete_extension_command = 'del ' + extension_file_name
+   os.system(delete_extension_command)
+   rename_zip_command = 'ren "' + zip_file_name + '" "' + extension_file_name + '"'
+   os.system(rename_zip_command)
 except:
    pass
 
