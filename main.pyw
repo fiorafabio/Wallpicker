@@ -73,6 +73,7 @@ if result.status_code == 200:
    with open(actual_relative_path, 'wb') as file:
       result.raw.decode_content = True
       shutil.copyfileobj(result.raw, file)
+driver.quit()
 
 # make zip file
 try:
@@ -91,5 +92,3 @@ try:
    os.system(rename_zip_command)
 except:
    pass
-
-driver.close()
